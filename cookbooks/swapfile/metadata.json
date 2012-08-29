@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+  },
+  "name": "swapfile",
+  "maintainer_email": "motech-dev@googlegroups.com",
+  "attributes": {
+  },
+  "license": "All rights reserved",
+  "suggestions": {
+  },
+  "platforms": {
+  },
+  "maintainer": "Grameen Foundation",
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+  "version": "0.0.3",
+  "recommendations": {
+  },
+  "recipes": {
+  },
+  "groupings": {
+  },
+  "conflicting": {
+  },
+  "replacing": {
+  },
+  "description": "Installs/Configures swapfile",
+  "providing": {
+  }
+}
