@@ -1,0 +1,17 @@
+{
+  "name": "motech-demo",	
+
+  "json_class": "Chef::Role",
+  "env_run_lists": {
+    "prod": [      
+      "role[motech-server]",
+      
+      "recipe[maven]",
+      "recipe[motech-demo]"
+    ]
+  },
+  "run_list": [
+  ],
+  "description": "Sets up motech demo instance",
+  "chef_type": "role"
+}

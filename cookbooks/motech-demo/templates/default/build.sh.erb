@@ -1,0 +1,19 @@
+WEBAPPS_DIR=<%= node[:tomcat][:webapp_dir]  %>
+BUILD_DIR=<%= node[:motech_demo][:build_dir] %>
+BUNDLE_DIR=<%= node[:motech_server][:dir] %>/bundles
+
+if [ -z $WEBAPPS_DIR ]; then
+	echo "webapps dir not defined"
+	exit 1
+fi
+
+rm -r $WEBAPPS_DIR/ROOT*
+
+cd $BUILD_DIR
+mvn install
+
+mkdir $WEBAPPS_DIR/ROOT
+unzip motech-platform-server.war -d $WEBAPPS_DIR/ROOT
+echo "org.osgi.framework.storage = <%= node[:motech_server][:dir] %>/felix-cache" >> $WEBAPPS_DIR/ROOT/WEB-INF/classes/osgi.properties
+
+service tomcat6 restart
