@@ -1,0 +1,35 @@
+{
+  "name": "motech-server",	
+
+  "json_class": "Chef::Role",
+  "env_run_lists": {
+    "prod": [      
+      "recipe[cron]",
+      "recipe[curl]",
+      
+      "recipe[java]",
+      
+      "recipe[mysql::server]",
+      "recipe[mysql::client]",
+      "recipe[activemq]",
+      "recipe[couchdb]",
+      
+      "recipe[apache2]",
+      "recipe[apache2::mod_proxy_balancer]",
+      "recipe[apache2::mod_proxy_ajp]",
+      "recipe[tomcat]",
+      
+      "recipe[motech-server]"
+    ]
+  },
+  "run_list": [
+  ],
+  "description": "Sets up the motech platform server",
+  "chef_type": "role",
+  
+  "override_attributes": {
+    "java": {
+       "jdk_version": "7"
+    }
+  }
+}

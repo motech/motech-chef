@@ -1,0 +1,8 @@
+<Proxy balancer://backtcserver>
+BalancerMember ajp://localhost:8009/
+</Proxy>
+ProxyPass /  balancer://backtcserver/
+
+# Workaround for ajp return text/plain all the time
+DefaultType text/html
+
