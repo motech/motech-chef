@@ -11,7 +11,14 @@
     ]
   },
   "run_list": [
-  ],
+  ],	
+
+  "override_attributes": {
+    "mysql": {
+       "server_root_password": "password"
+    }
+  }, 
+
   "description": "Sets up motech demo instance",
   "chef_type": "role"
 }

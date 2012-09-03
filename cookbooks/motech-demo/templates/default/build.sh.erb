@@ -13,7 +13,9 @@ cd $BUILD_DIR
 mvn install
 
 mkdir $WEBAPPS_DIR/ROOT
-unzip motech-platform-server.war -d $WEBAPPS_DIR/ROOT
+chown -R <%= node[:tomcat][:user] %>:<%= node[:tomcat][:group]  %> $WEBAPPS_DIR/ROOT
+
+unzip motech-platform-server.war -d $WEBAPPS_DIR/ROOT 
 echo "org.osgi.framework.storage = <%= node[:motech_server][:dir] %>/felix-cache" >> $WEBAPPS_DIR/ROOT/WEB-INF/classes/osgi.properties
 
 service tomcat6 restart
