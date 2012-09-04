@@ -16,6 +16,7 @@
             <name>Snapshots</name>
             <snapshots>
                 <enabled>true</enabled>
+		<updatePolicy>always</updatePolicy>
             </snapshots>
             <url>http://nexus.motechproject.org/content/repositories/snapshots/</url>
         </repository>
@@ -215,6 +216,7 @@
                             <outputDirectory>
                                 <%=node[:motech_server][:dir] %>/bundles
                             </outputDirectory>
+			    <overwriteSnapshots>true</overwriteSnapshots>
                         </configuration>
                     </execution>
                     <execution>
@@ -229,6 +231,7 @@
                             <outputDirectory>
                                 ${project.basedir}
                             </outputDirectory>
+			    <overwriteSnapshots>true</overwriteSnapshots>
                         </configuration>
                     </execution>
                 </executions>

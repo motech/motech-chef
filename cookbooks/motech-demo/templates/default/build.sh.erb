@@ -2,15 +2,19 @@ WEBAPPS_DIR=<%= node[:tomcat][:webapp_dir]  %>
 BUILD_DIR=<%= node[:motech_demo][:build_dir] %>
 BUNDLE_DIR=<%= node[:motech_server][:dir] %>/bundles
 
-if [ -z $WEBAPPS_DIR ]; then
+if [ ! -d $WEBAPPS_DIR ]; then
 	echo "webapps dir not defined"
+	exit 1
+fi
+if [ ! -d $BUNDLE_DIR ]; then
+	echo "bundle dir not defined"
 	exit 1
 fi
 
 rm -r $WEBAPPS_DIR/ROOT*
 
 cd $BUILD_DIR
-mvn install
+mvn clean install
 
 mkdir $WEBAPPS_DIR/ROOT
 chown -R <%= node[:tomcat][:user] %>:<%= node[:tomcat][:group]  %> $WEBAPPS_DIR/ROOT
