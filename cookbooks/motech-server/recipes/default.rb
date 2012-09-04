@@ -29,6 +29,13 @@ directory "#{node['motech_server']['dir']}" do
 	action :create
 end
 
+directory "#{node['motech_server']['dir']}/bundles" do
+	owner "#{node['tomcat']['user']}"
+	group "#{node['tomcat']['group']}"
+	mode "0755"
+	action :create
+end
+
 directory "#{node['motech_server']['conf_dir']}" do
         owner "#{node['tomcat']['user']}"
         group "#{node['tomcat']['group']}"
