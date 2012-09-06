@@ -51,12 +51,18 @@ script "bootstrap" do
 	EOH
 end
 
+package "unzip" do
+	action :install
+end
+
 script "build" do
-	user "root"
-	interpreter "bash"
-	code <<-EOH
-		#{node['motech_demo']['build_dir']}/build.sh
-	EOH
+        user "root"
+        interpreter "bash"
+        code <<-EOH
+                #{node['motech_demo']['build_dir']}/build.sh
+        EOH
+        only_if "test -L #{node['java']['java_home']} || test -d #{node['java']['java_home']}"
+	subscribes :run, resources("ruby_block[update-java-alternatives]"), :immediately
 end
 
 cron "rebuild" do
