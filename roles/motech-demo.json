@@ -5,7 +5,8 @@
   "env_run_lists": {
     "prod": [      
       "role[motech-server]",
-      
+      	      
+      "recipe[swapfile]",
       "recipe[maven]",
       "recipe[motech-demo]"
     ]
@@ -16,6 +17,9 @@
   "override_attributes": {
     "mysql": {
        "server_root_password": "password"
+    },
+    "swapfile": {
+       "swap_size_megabytes": "1024"
     }
   }, 
 
