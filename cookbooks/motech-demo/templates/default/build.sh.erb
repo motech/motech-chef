@@ -12,6 +12,7 @@ if [ ! -d $BUNDLE_DIR ]; then
 fi
 
 rm -r $WEBAPPS_DIR/ROOT*
+rm $BUNDLE_DIR/*
 
 cd $BUILD_DIR
 mvn clean install

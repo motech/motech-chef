@@ -56,12 +56,12 @@ package "unzip" do
 end
 
 script "build" do
-        user "root"
-        interpreter "bash"
-        code <<-EOH
-                #{node['motech_demo']['build_dir']}/build.sh
-        EOH
-        only_if "test -L #{node['java']['java_home']} || test -d #{node['java']['java_home']}"
+	user "root"
+	interpreter "bash"
+	code <<-EOH
+		#{node['motech_demo']['build_dir']}/build.sh
+	EOH
+	only_if "test -L #{node['java']['java_home']} || test -d #{node['java']['java_home']}"
 	subscribes :run, resources("ruby_block[update-java-alternatives]"), :immediately
 end
 
