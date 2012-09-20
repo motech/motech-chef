@@ -21,6 +21,12 @@
     "swapfile": {
        "swap_size_megabytes": "1024"
     }
+  },
+
+  "default_attributes": {
+    "motech_demo": {
+       "hostname": "demo.motechproject.org"
+    }
   }, 
 
   "description": "Sets up motech demo instance",

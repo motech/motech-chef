@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+	ServerName <%= node[:motech_demo][:hostname] %>
+
+	<Proxy balancer://backtcserver>
+		BalancerMember ajp://localhost:8009/
+	</Proxy>
+
+	ProxyPass /graphite http://<%= node[:graphite][:url]  %>
+	ProxyPass /content http://<%= node[:graphite][:url] %>/content
+	ProxyPass /browser http://<%= node[:graphite][:url]  %>/browser
+	ProxyPass /composer http://<%= node[:graphite][:url]  %>/composer
+	ProxyPass /media http://<%= node[:graphite][:url]  %>/media
+	ProxyPass / balancer://backtcserver/
+
+	# Workaround for ajp return text/plain all the time
+	DefaultType text/html
+
+</VirtualHost>
+
