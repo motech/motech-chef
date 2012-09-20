@@ -15,12 +15,6 @@ template "#{node['apache']['dir']}/mods-available/proxy.conf" do
 	owner "root"
 end
 
-template "#{node['apache']['dir']}/conf.d/ajp.conf" do
-	source "ajp.conf.erb"
-	mode "0644"
-	owner "root"
-end
-
 ## Dirs for motech
 directory "#{node['motech_server']['dir']}" do
 	owner "#{node['tomcat']['user']}"
@@ -59,4 +53,9 @@ end
 
 link "#{node['tomcat']['home']}/.motech" do
 	to "#{node['motech_server']['dir']}"
+end
+
+web_app "motech" do
+	enable true
+	template "motech.erb"
 end
