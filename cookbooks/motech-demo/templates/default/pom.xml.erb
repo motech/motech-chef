@@ -7,7 +7,7 @@
     <name>Motech Demo Server</name>
     <groupId>org.motechproject</groupId>
     <artifactId>motech-demo-build</artifactId>
-    <version>0.13-SNAPSHOT</version>
+    <version>0.14-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -153,11 +153,11 @@
             <artifactId>motech-demo-bundle</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.motechproject</groupId>
             <artifactId>motech-event-bundle</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.motechproject</groupId>
             <artifactId>motech-event-logging-bundle</artifactId>
@@ -371,6 +371,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
             <version>1.2.2.osgi</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>com.springsource.org.apache.commons.io</artifactId>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
