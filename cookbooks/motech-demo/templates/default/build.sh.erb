@@ -1,6 +1,7 @@
 WEBAPPS_DIR=<%= node[:tomcat][:webapp_dir]  %>
 BUILD_DIR=<%= node[:motech_demo][:build_dir] %>
 BUNDLE_DIR=<%= node[:motech_server][:dir] %>/bundles
+CONFIG_DIR=<%= node[:motech_server][:conf_dir] %>
 
 if [ ! -d $WEBAPPS_DIR ]; then
 	echo "webapps dir not defined"
@@ -11,8 +12,16 @@ if [ ! -d $BUNDLE_DIR ]; then
 	exit 1
 fi
 
+if [ ! -d $CONFIG_DIR ]; then
+	echo "config dir not defined"
+	exit 1
+fi
+
 rm -r $WEBAPPS_DIR/ROOT*
 rm $BUNDLE_DIR/*
+
+cd $CONFIG_DIR
+ls | grep -v "motech-settings.conf" | xargs rm -r
 
 cd $BUILD_DIR
 mvn clean install

@@ -11,6 +11,9 @@
     <packaging>pom</packaging>
 
     <properties>
+	<couchdb.server>localhost</couchdb.server>
+        <couchdb.port>5984</couchdb.port>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.1.0.RELEASE</spring.version>
         <spring.integration.version>2.1.1.RELEASE</spring.integration.version>
         <activemq.version>5.4.2</activemq.version>
@@ -22,7 +25,7 @@
             <name>Snapshots</name>
             <snapshots>
                 <enabled>true</enabled>
-		        <updatePolicy>always</updatePolicy>
+		<updatePolicy>always</updatePolicy>
             </snapshots>
             <url>http://nexus.motechproject.org/content/repositories/snapshots/</url>
         </repository>
@@ -707,7 +710,7 @@
                             <outputDirectory>
                                <%=node[:motech_server][:dir] %>/bundles
                             </outputDirectory>
-			                <overwriteSnapshots>true</overwriteSnapshots>
+		            <overwriteSnapshots>true</overwriteSnapshots>
                         </configuration>
                     </execution>
                     <execution>
@@ -722,7 +725,136 @@
                             <outputDirectory>
                                 ${project.basedir}
                             </outputDirectory>
-			                <overwriteSnapshots>true</overwriteSnapshots>
+		            <overwriteSnapshots>true</overwriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>drop-couchdb-databases</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-alert"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-appointments"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-cmslite"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/trees"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/flowsession"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/calldetailrecords"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-event-logging"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-ivr-asterisk"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-ivr-voxeo"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-message-campaign"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-outbox"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-pillreminder"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/rules"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-scheduletracking-api"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-sms-audit"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-s"/>
+                                    <arg value="-S"/>
+                                    <arg value="-X"/>
+                                    <arg value="DELETE"/>
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-web-security"/>
+                                </exec>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
