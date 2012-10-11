@@ -62,7 +62,7 @@ script "build" do
 		#{node['motech_demo']['build_dir']}/build.sh
 	EOH
 	only_if "test -L #{node['java']['java_home']} || test -d #{node['java']['java_home']}"
-	subscribes :run, resources("ruby_block[update-java-alternatives]"), :immediately
+	#subscribes :run, resources("ruby_block[update-java-alternatives]"), :immediately
 end
 
 cron "rebuild" do
