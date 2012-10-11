@@ -121,5 +121,6 @@ default[:jenkins][:http_proxy][:listen_ports]         = [ 80 ]
 default[:jenkins][:http_proxy][:host_name]            = nil
 default[:jenkins][:http_proxy][:host_aliases]         = []
 default[:jenkins][:http_proxy][:client_max_body_size] = "1024m"
+default[:jenkins][:http_proxy][:basic_auth] = "enabled"
 default[:jenkins][:http_proxy][:basic_auth_username] = "jenkins"
 default[:jenkins][:http_proxy][:basic_auth_password] = "jenkins"
