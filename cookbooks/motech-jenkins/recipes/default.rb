@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-version = node['activemq']['version']
-mirror = node['activemq']['mirror']
 activemq_home = "#{node['activemq']['home']}/apache-activemq-#{node['activemq']['version']}"
 
 template "#{node[:jenkins][:server][:home]}/hudson.plugins.git.GitSCM.xml" do
