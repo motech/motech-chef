@@ -6,6 +6,8 @@ run_list "role[apache-server]",
         "recipe[java]",
         "recipe[maven::maven3]",
         "recipe[git]",
+	"recipe[couchdb]",
+	"recipe[activemq]",
         "recipe[jenkins]",
         "recipe[motech-jenkins]"
 
