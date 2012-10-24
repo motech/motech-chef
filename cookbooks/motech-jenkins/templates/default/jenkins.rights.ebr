@@ -1,0 +1,3 @@
+<%= node[:jenkins][:server][:user] %> ALL=NOPASSWD:/etc/init.d/couchdb
+<%= node[:jenkins][:server][:user] %> ALL=NOPASSWD:/etc/init.d/activemq
+

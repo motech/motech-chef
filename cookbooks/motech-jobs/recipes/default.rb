@@ -7,12 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "jenkins"
+include_recipe "motech-jenkins"
 
 directory "/var/lib/jenkins/jobs" do
-   owner "#{node[:jenkins][:server][:user]}"
-   group "#{node[:jenkins][:server][:group]}"
-   action :create
+    owner "#{node[:jenkins][:server][:user]}"
+    group "#{node[:jenkins][:server][:group]}"
+    action :create
 end
 
 @node[:motech_jobs][:jobs_enabled].each do |job_name|

@@ -38,5 +38,10 @@ override_attributes(
     "3" => {
         :url => "http://www.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.tar.gz"
     }
+  },
+  :authorization => {
+      :sudo => {
+        :include_sudoers_d => true
+      }
   }
 )
