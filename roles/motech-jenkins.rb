@@ -12,6 +12,7 @@ run_list "role[apache-server]",
         "recipe[activemq]",
         "recipe[jenkins]",
         "recipe[motech-jenkins]",
+        "recipe[motech-jenkins::bootstrapdb]",
         "recipe[motech-jobs]"
 
 override_attributes(

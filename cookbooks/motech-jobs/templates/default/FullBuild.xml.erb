@@ -47,7 +47,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
       <hudson.triggers.SCMTrigger>
-          <spec>@hourly</spec>
+          <spec><%= node[:motech_jobs][:fullBuild][:schedule] %></spec>
       </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -55,7 +55,7 @@
     <groupId>org.motechproject</groupId>
     <artifactId>motech</artifactId>
   </rootModule>
-  <goals>clean install -PIT -Dmysql.user=jenkins -Dmysql.password=j3nk1ns</goals>
+  <goals>clean install -PIT -Dmysql.user=<%= node[:motech_jenkins][:mysql][:user] %> -Dmysql.password=<%= node[:motech_jenkins][:mysql][:password] %></goals>
   <mavenOpts>-XX:MaxPermSize=512m</mavenOpts>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
