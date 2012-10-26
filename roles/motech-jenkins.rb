@@ -23,7 +23,7 @@ override_attributes(
       :basic_auth => "disabled"
     },
     :server => { 
-      :plugins => ["gerrit-trigger", "git", "greenballs", "locks-and-latches"],
+      :plugins => ["gerrit-trigger", "git", "greenballs", "locks-and-latches", "sonar"],
       :host => "localhost",
       :port => 8060
     }

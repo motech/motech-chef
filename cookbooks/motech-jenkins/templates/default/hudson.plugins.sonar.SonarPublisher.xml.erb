@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarPublisher_-DescriptorImpl plugin="sonar@2.0">
+  <helpRedirect/>
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name><%= node[:motech_jenkins][:sonar][:name] %></name>
+      <disabled><%= node[:motech_jenkins][:sonar][:disabled] %></disabled>
+      <serverUrl><%= node[:motech_jenkins][:sonar][:url] %></serverUrl>
+      <serverPublicUrl></serverPublicUrl>
+      <mojoVersion></mojoVersion>
+      <databaseUrl><%= node[:motech_jenkins][:sonar][:database][:url] %></databaseUrl>
+      <databaseDriver><%= node[:motech_jenkins][:sonar][:database][:driver] %></databaseDriver>
+      <databaseLogin><%= node[:motech_jenkins][:sonar][:database][:login] %></databaseLogin>
+      <databasePassword><%= node[:motech_jenkins][:sonar][:database][:password] %></databasePassword>
+      <additionalProperties></additionalProperties>
+      <triggers>
+        <skipScmCause><%= node[:motech_jenkins][:sonar][:skip][:scm] %></skipScmCause>
+        <skipUpstreamCause><%= node[:motech_jenkins][:sonar][:skip][:upstream] %></skipUpstreamCause>
+        <envVar></envVar>
+      </triggers>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
+</hudson.plugins.sonar.SonarPublisher_-DescriptorImpl>
