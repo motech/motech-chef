@@ -12,4 +12,4 @@ default[:motech_jobs][:unitTestBuild][:description] = "A simple master branch bu
 
 default[:motech_jobs][:sonarBuild][:name] = "SonarBuild"
 default[:motech_jobs][:sonarBuild][:repository_url] = "https://code.google.com/p/motech/"
-default[:motech_jobs][:donarBuild][:schedule] = "@midnight"
+default[:motech_jobs][:sonarBuild][:schedule] = "@midnight"
