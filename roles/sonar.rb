@@ -15,14 +15,5 @@ override_attributes(
     :jdbc_url => "jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8",
     :jdbc_driverClassName => "com.mysql.jdbc.Driver",
     :jdbc_validationQuery => "select 1"
-  },
-  :mysql => {
-    :server_root_password => "password",
-    :bind_address => "localhost"
-  },
-  :authorization => {
-      :sudo => {
-        :include_sudoers_d => true
-      }
   }
 )
