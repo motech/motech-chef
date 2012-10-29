@@ -19,7 +19,8 @@ override_attributes(
   :jenkins => {
     :http_proxy => { 
       :variant => "apache2",
-      :host_name => "fufu.motechproject.org",
+      :host_name => "ci.motechproject.org",
+      :host_aliases => ["fufu.motechproject.org"],
       :basic_auth => "disabled"
     },
     :server => { 
