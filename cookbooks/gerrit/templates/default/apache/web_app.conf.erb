@@ -1,0 +1,37 @@
+<VirtualHost *:<%= node['gerrit']['ssl'] ? '443' : '80' %>>
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+  DocumentRoot <%= @params[:docroot] %>
+ 
+  <% if node['gerrit']['ssl'] %>
+  SSLEngine on
+  SSLProxyEngine on
+  SSLCertificateFile     /etc/ssl/certs/ssl-cert-snakeoil.pem
+  SSLCertificateKeyFile  /etc/ssl/private/ssl-cert-snakeoil.key
+  <% end %>
+  
+  LogLevel info
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+
+  ProxyRequests Off
+  ProxyVia Off
+  ProxyPreserveHost On
+
+  <Proxy *>
+    Order deny,allow
+    Allow from all
+  </Proxy>
+
+  ProxyPass        /   http://localhost:8080/
+</VirtualHost>
+
+<% if node['gerrit']['ssl'] %>
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+
+  RewriteEngine On
+  RewriteRule (.*) https://%{HTTP_HOST}$1
+</VirtualHost>
+<% end %>
