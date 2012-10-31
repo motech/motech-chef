@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@1.485">
+  <actions/>
+  <description></description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>7</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.24">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>origin</name>
+        <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
+        <url><%= node[:motech_jobs][:release][:repository_url] %></url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>0.14.X</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <disableSubmodules>false</disableSubmodules>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <pruneBranches>false</pruneBranches>
+    <remotePoll>false</remotePoll>
+    <ignoreNotifyCommit>false</ignoreNotifyCommit>
+    <useShallowClone>false</useShallowClone>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>org.motechproject</groupId>
+    <artifactId>motech</artifactId>
+  </rootModule>
+  <goals>clean deploy -PIT -Dmysql.user=<%= node[:motech_jenkins][:mysql][:user] %> -Dmysql.password=<%= node[:motech_jenkins][:mysql][:password] %></goals>
+  <mavenOpts>-Xms128m -Xmx512m -XX:PermSize=128m -XX:MaxPermSize=512m -Dmaven.test.failure.ignore=false</mavenOpts>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <perModuleEmail>false</perModuleEmail>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <settingConfigId></settingConfigId>
+  <globalSettingConfigId></globalSettingConfigId>
+  <reporters/>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.10">
+      <deleteDirs>false</deleteDirs>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    <hudson.plugins.release.ReleaseWrapper plugin="release@2.3">
+      <releaseVersionTemplate>motech-${releaseVersion}</releaseVersionTemplate>
+      <doNotKeepLog>false</doNotKeepLog>
+      <overrideBuildParameters>false</overrideBuildParameters>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>releaseVersion</name>
+          <description>Specify the version of this release.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>developmentVersion</name>
+          <description>Specify the next development version after this release.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>scm.tag</name>
+          <description></description>
+          <defaultValue>release-0.14</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+      <preBuildSteps>
+        <hudson.tasks.Shell>
+          <command>git clean -fdx
+git checkout -f <%= node[:motech_jobs][:release][:branch] %> || git checkout -b <%= node[:motech_jobs][:release][:branch] %>
+git reset --hard <%= node[:motech_jobs][:release][:branch] %></command>
+        </hudson.tasks.Shell>
+      </preBuildSteps>
+      <postBuildSteps/>
+      <postSuccessfulBuildSteps>
+        <hudson.tasks.Maven>
+          <targets>release:clean release:prepare release:perform </targets>
+          <mavenName>(Default)</mavenName>
+          <properties>scm.connection=scm:git:<%= node[:motech_jobs][:release][:repository_url] %>
+scm.developerConnection=scm:git:<%= node[:motech_jobs][:release][:repository_url] %>
+maven.test.failure.ignore=false</properties>
+          <usePrivateRepository>false</usePrivateRepository>
+        </hudson.tasks.Maven>
+        <hudson.tasks.Ant plugin="ant@1.1">
+          <targets>publish.javadoc -DRELEASE_VERSION=${releaseVersion}</targets>
+          <buildFile>build/build.xml</buildFile>
+          <properties>scm.connection=scm:git:<%= node[:motech_jobs][:release][:repository_url] %>
+	scm.developerConnection=scm:git:<%= node[:motech_jobs][:release][:repository_url] %></properties>
+        </hudson.tasks.Ant>
+      </postSuccessfulBuildSteps>
+      <postFailedBuildSteps/>
+    </hudson.plugins.release.ReleaseWrapper>
+    <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
+      <locks>
+        <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+          <name>dependencies</name>
+        </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+      </locks>
+    </hudson.plugins.locksandlatches.LockWrapper>
+  </buildWrappers>
+  <prebuilders>
+    <hudson.tasks.Shell>
+      <command>sudo /etc/init.d/couchdb start
+sudo /etc/init.d/activemq start</command>
+    </hudson.tasks.Shell>
+  </prebuilders>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>sudo /etc/init.d/couchdb stop
+sudo /etc/init.d/activemq stop</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
+  <runPostStepsIfResult>
+    <name>FAILURE</name>
+    <ordinal>2</ordinal>
+    <color>RED</color>
+  </runPostStepsIfResult>
+</maven2-moduleset>

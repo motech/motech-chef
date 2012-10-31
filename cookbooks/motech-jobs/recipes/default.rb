@@ -28,3 +28,15 @@ end
         group "#{node[:jenkins][:server][:group]}"
     end
 end
+
+directory "/var/lib/jenkins/jobs/#{default[:motech_jobs][:release][:name]}" do
+	owner "#{node[:jenkins][:server][:user]}"
+    	group "#{node[:jenkins][:server][:group]}"
+    	action :create
+end
+
+template "/var/lib/jenkins/jobs/#{default[:motech_jobs][:release][:name]}/config.xml" do
+	owner "#{node[:jenkins][:server][:user]}"
+        group "#{node[:jenkins][:server][:group]}"
+	source "release.xml.erb"
+end
