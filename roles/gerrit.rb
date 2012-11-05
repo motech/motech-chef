@@ -8,7 +8,8 @@ run_list "role[apache-server]",
 
 override_attributes(
   :gerrit => {
-    :hostname => "review.motechproject.org"
+    :hostname => "review.motechproject.org",
+    :canonicalWebUrl => "http://review.motechproject.org/"
   }
 )
 
