@@ -11,3 +11,5 @@ default[:motech_jenkins][:sonar][:database][:login] = "sonar"
 default[:motech_jenkins][:sonar][:database][:password] = "c29uYXI="
 default[:motech_jenkins][:sonar][:skip][:scm] = false
 default[:motech_jenkins][:sonar][:skip][:upstream] = false
+
+default[:motech_jenkins][:wheezy_dir] = "/opt/wheezy"
