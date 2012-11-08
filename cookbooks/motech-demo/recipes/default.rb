@@ -65,8 +65,10 @@ script "build" do
 	#subscribes :run, resources("ruby_block[update-java-alternatives]"), :immediately
 end
 
-cron "rebuild" do
-	hour "5"
-	minute "0"
-	command "#{node['motech_demo']['build_dir']}/build.sh"
+if (node['motech_demo']['rebuild'] == true) then
+	cron "rebuild" do
+		hour "5"
+		minute "0"
+		command "#{node['motech_demo']['build_dir']}/build.sh"
+	end
 end
