@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "motech-jenkins"
+include_recipe "jenkins"
 
 directory "/var/lib/jenkins/jobs" do
     owner "#{node[:jenkins][:server][:user]}"

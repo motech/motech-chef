@@ -39,6 +39,7 @@ template "/etc/sudoers.d/jenkins" do
     owner "root"
     group "root"
     mode 0440
+    only_if node[:motech_jenkins][:give_rights]
 end
 
 

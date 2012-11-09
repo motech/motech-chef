@@ -13,3 +13,5 @@ default[:motech_jenkins][:sonar][:skip][:scm] = false
 default[:motech_jenkins][:sonar][:skip][:upstream] = false
 
 default[:motech_jenkins][:wheezy_dir] = "/opt/wheezy"
+  
+default[:motech_jenkins][:give_rights] = false
