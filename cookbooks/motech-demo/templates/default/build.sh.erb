@@ -34,4 +34,8 @@ echo "org.osgi.framework.storage = <%= node[:motech_server][:dir] %>/felix-cache
 chown -R <%= node[:tomcat][:user] %>:<%= node[:tomcat][:group]  %> $WEBAPPS_DIR/ROOT
 chown -R <%= node[:tomcat][:user] %>:<%= node[:tomcat][:group]  %> $BUNDLE_DIR
 
+# Workaround for using cwd as queue location in smslib
+mkdir $WEBAPPS_DIR/../queue
+chown <%= node[:tomcat][:user] %>:<%= node[:tomcat][:group] %> $WEBAPPS_DIR/../queue
+ 
 service tomcat<%= node[:tomcat][:base_version]%> restart
