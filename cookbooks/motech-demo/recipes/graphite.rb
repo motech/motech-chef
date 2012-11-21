@@ -13,6 +13,6 @@ script "add_graphite_hostname" do
 		if ! grep -q " #{node[:graphite][:url]}$" "/etc/hosts"; then
 			echo "127.0.0.1 #{node['graphite']['url']}" >> /etc/hosts
 		fi
-		echo -e "\ngraphite.url=#{node[:motech_demo][:hostname]}/graphite" >> #{node['motech_server']['conf_dir']}/motech-settings.conf
+		echo -e "\ngraphite.url=#{node[:motech_demo][:hostname]}/graphite/" >> #{node['motech_server']['conf_dir']}/motech-settings.conf
 	EOH
 end
