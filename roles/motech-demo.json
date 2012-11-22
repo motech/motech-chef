@@ -5,9 +5,9 @@
   "env_run_lists": {
     "prod": [      
       "role[motech-server]",
+      "role[maven3]",
       	      
       "recipe[swapfile]",
-      "recipe[maven]",
       "recipe[motech-demo]"
     ]
   },

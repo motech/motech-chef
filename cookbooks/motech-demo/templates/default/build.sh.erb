@@ -24,7 +24,7 @@ cd $CONFIG_DIR
 ls | grep -v "motech-settings.conf" | xargs rm -r
 
 cd $BUILD_DIR
-mvn clean install
+mvn clean install -U
 
 mkdir $WEBAPPS_DIR/ROOT
 

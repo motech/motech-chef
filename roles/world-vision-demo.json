@@ -7,7 +7,7 @@
       "role[motech-server]",
       	      
       "recipe[swapfile]",
-      "recipe[maven]",
+      "role[maven3]",
       "recipe[motech-demo]"
     ]
   },
