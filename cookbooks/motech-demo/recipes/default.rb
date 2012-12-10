@@ -32,6 +32,12 @@ template "#{node['motech_demo']['build_dir']}/openmrs-1.8.sql" do
 	mode "0644"
 end
 
+template "#{node['motech_demo']['build_dir']}/adminUser.json" do
+	source "adminUser.json.erb"
+	owner "root"
+	mode "0644"
+end
+
 script "bootstrap" do
 	user "root"
 	interpreter "bash"

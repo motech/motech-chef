@@ -55,7 +55,7 @@ link "#{node['tomcat']['home']}/.motech" do
 	to "#{node['motech_server']['dir']}"
 end
 
-web_app "motech" do
+web_app "000-motech" do
 	enable true
 	template "motech.erb"
 end

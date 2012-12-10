@@ -33,6 +33,12 @@
     <dependencies>
        <dependency>
            <groupId>${project.groupId}</groupId>
+           <artifactId>motech-platform-server</artifactId>
+           <version>${project.version}</version>
+           <type>war</type>
+       </dependency>
+       <dependency>
+           <groupId>${project.groupId}</groupId>
            <artifactId>motech-platform-commons-date</artifactId>
            <version>${project.version}</version>
        </dependency>
@@ -178,7 +184,7 @@
        </dependency>
        <dependency>
            <groupId>${project.groupId}</groupId>
-           <artifactId>motech-web-security-bundle</artifactId>
+           <artifactId>motech-platform-web-security-bundle</artifactId>
            <version>${project.version}</version>
        </dependency>
        <dependency>
@@ -195,6 +201,11 @@
            <groupId>${project.groupId}</groupId>
            <artifactId>motech-tasks-bundle</artifactId>
            <version>${project.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>org.springframework.context.support</artifactId>
+           <version>${spring.version}</version>
        </dependency>
     </dependencies>
 
@@ -213,7 +224,7 @@
                         </goals>
                         <configuration>
                             <stripVersion>false</stripVersion>
-                            <excludeArtifactIds>motech-platform-server, motech-platform-server-bundle, commons-logging, log4j, slf4j-log4j12</excludeArtifactIds>
+                            <excludeArtifactIds>motech-platform-server, commons-logging, log4j, slf4j-log4j12</excludeArtifactIds>
                             <excludeTransitive>false</excludeTransitive>
                             <outputDirectory>
                                <%=node[:motech_server][:dir] %>/bundles
@@ -361,6 +372,15 @@
                                     <arg value="-X"/>
                                     <arg value="DELETE"/>
                                     <arg value="http://${couchdb.server}:${couchdb.port}/motech-web-security"/>
+                                </exec>
+                                <exec executable="curl">
+                                    <arg value="-X" />
+                                    <arg value="POST" />
+                                    <arg value="http://${couchdb.server}:${couchdb.port}/motech-web-security" />
+                                    <arg value="-d"/>
+                                    <arg value="@${project.basedir}/adminUser.json"/>
+                                    <arg value="-H"/>
+                                    <arg value="Content-Type: application/json"/>
                                 </exec>
                             </target>
                         </configuration>

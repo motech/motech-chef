@@ -7,7 +7,7 @@
       "recipe[cron]",
       "recipe[curl]",
       
-      "recipe[java]",
+      "role[oracle-jdk7]",
       
       "recipe[mysql::server]",
       "recipe[mysql::client]",
@@ -24,15 +24,5 @@
   "run_list": [
   ],
   "description": "Sets up the motech platform server",
-  "chef_type": "role",
-  
-  "override_attributes": {
-    "java": {
-       "jdk_version": "7",
-       "install_flavor": "oracle",
-       "oracle": {
-          "accept_oracle_download_terms": true
-       }
-    }
-  }
+  "chef_type": "role"
 }
