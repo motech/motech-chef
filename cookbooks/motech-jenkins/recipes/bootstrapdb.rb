@@ -20,6 +20,7 @@ script "permissions" do
     mysql -u root -p$MYSQL_PASS -e "GRANT ALL ON openmrs190.* TO '$JENKINS_USER'@'localhost' IDENTIFIED BY '$JENKINS_PASS' WITH GRANT OPTION"
     mysql -u root -p$MYSQL_PASS -e "GRANT ALL ON motech_openmrs_api.* TO '$JENKINS_USER'@'localhost' IDENTIFIED BY '$JENKINS_PASS' WITH GRANT OPTION"
     mysql -u root -p$MYSQL_PASS -e "GRANT ALL ON openmrs_api_test.* TO '$JENKINS_USER'@'localhost' IDENTIFIED BY '$JENKINS_PASS' WITH GRANT OPTION"
+    mysql -u root -p$MYSQL_PASS -e "GRANT ALL ON motech.* TO '$JENKINS_USER'@'localhost' IDENTIFIED BY '$JENKINS_PASS' WITH GRANT OPTION"
 
     EOH
 end
