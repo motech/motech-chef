@@ -2,7 +2,7 @@
 # Cookbook Name:: motech-demo
 # Recipe:: default
 #
-# Copyright 2012, YOUR_COMPANY_NAME
+# Copyright 2012, Grameen Foundation
 #
 # All rights reserved - Do Not Redistribute
 #
