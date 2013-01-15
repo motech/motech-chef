@@ -2,10 +2,10 @@ chef_gem "inifile"
 
 require 'inifile'
 
-tmp_dir = node[:couchdb_lucene][:tmp_dir]
-install_dir = node[:couchdb_lucene][:install_dir]
-deb_file = node[:couchdb_lucene][:deb_file]
-couchdb_local_ini_path = node[:couchdb_lucene][:couchdb_local_ini_path]    
+tmp_dir = node["couchdb_lucene"]["tmp_dir"]
+install_dir = node["couchdb_lucene"]["install_dir"]
+deb_file = node["couchdb_lucene"]["deb_file"]
+couchdb_local_ini_path = node["couchdb_lucene"]["couchdb_local_ini_path"]    
 
 # include_recipe "couchdb-lucene::build-from-source"
 

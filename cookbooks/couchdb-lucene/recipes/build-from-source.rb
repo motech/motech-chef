@@ -1,9 +1,9 @@
 include_recipe 'git'
 include_recipe 'maven'
 
-tmp_dir = node[:couchdb_lucene][:tmp_dir]
-install_dir = node[:couchdb_lucene][:install_dir]
-release_commit = node[:couchdb_lucene][:release_commit]
+tmp_dir = node["couchdb_lucene"]["tmp_dir"]
+install_dir = node["couchdb_lucene"]["install_dir"]
+release_commit = node["couchdb_lucene"]["release_commit"]
 
 bash 'build couchdb-lucene' do
 	
