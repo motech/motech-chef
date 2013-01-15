@@ -8,7 +8,8 @@ run_list "role[apache-server]",
         "recipe[ant]",
         "recipe[doxygen]",
         "recipe[git]",
-        "recipe[jenkins]"
+        "recipe[jenkins]",
+        "recipe[couchdb-lucene]"        
 
 override_attributes(
   :jenkins => {
