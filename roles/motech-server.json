@@ -13,6 +13,7 @@
       "recipe[mysql::client]",
       "recipe[activemq]",
       "recipe[couchdb]",
+      "recipe[couchdb-lucene]",
 
       "recipe[tomcat]",
 
