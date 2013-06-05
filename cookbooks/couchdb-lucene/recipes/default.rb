@@ -37,6 +37,7 @@ ruby_block "couchdb integration" do
 		ini['couchdb']['os_process_timeout'] = "60000"
 		ini['external']['fti'] = "/usr/bin/python #{install_dir}/tools/couchdb-external-hook.py"
 		ini['httpd_global_handlers']['_fti'] = "{couch_httpd_external, handle_external_req, <<\"fti\">>}"
+    ini['httpd_db_handlers']['_fti'] = "{couch_httpd_external, handle_external_req, <<\"fti\">>}"
 		ini.save
 
 		notifies :restart, resources(:service => "couchdb")
