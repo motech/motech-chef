@@ -19,6 +19,7 @@
       "recipe[users::sysadmins]",
       "recipe[emacs]",
       "recipe[chef-client::config]",
+      "recipe[chef-client::service]",
       "recipe[chef-client::delete_validation]"
     ]
   },
