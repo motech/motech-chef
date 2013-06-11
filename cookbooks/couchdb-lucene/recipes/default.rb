@@ -11,10 +11,8 @@ couchdb_local_ini_path = node["couchdb_lucene"]["couchdb_local_ini_path"]
 
 # include_recipe "couchdb-lucene::build-from-source"
 
-# fails 
-# service "couchdb-lucene" do
-#   action [:enable, :start]
-# end
+service "couchdb-lucene" do
+end
 
 bash 'install deb' do
 	
@@ -48,5 +46,5 @@ template "couchdb-lucene" do
   path "/etc/init.d/couchdb-lucene"
   source "couchdb-lucene.erb"
   mode "0755"
-  notifies :start, resources(:service => "couchdb-lucene")
+  notifies :restart, resources(:service => "couchdb-lucene")
 end
