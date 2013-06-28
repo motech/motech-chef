@@ -5,6 +5,12 @@
 		BalancerMember ajp://localhost:8009/
 	</Proxy>
 
+	<Proxy balancer://couchserver>
+                BalancerMember http://localhost:5984
+	</Proxy>
+
+	ProxyPass /couch balancer://couchserver
+
 	ProxyPass /graphite http://<%= node[:graphite][:url]  %>
 	ProxyPass /content http://<%= node[:graphite][:url] %>/content
 	ProxyPass /browser http://<%= node[:graphite][:url]  %>/browser
